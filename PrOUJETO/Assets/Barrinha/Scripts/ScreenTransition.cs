@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class ScreenTransition : MonoBehaviour
 {
-    [SerializeField] GameObject[] screenList;
+    private GameObject[] screenList;
     [SerializeField] int actualScreen = 0;
     public void GoToMenu()
     {
