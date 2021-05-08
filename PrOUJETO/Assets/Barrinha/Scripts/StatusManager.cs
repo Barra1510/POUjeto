@@ -4,32 +4,73 @@ using UnityEngine;
 
 public class StatusManager : MonoBehaviour
 {
-    enum STATE {TIRED, OK, HAPPY, SAD}
-    STATE myState;
-    [SerializeField] int currentState = 0;
-    // Update is called once per frame
+    //Pou States
+    public enum STATE {HUNGER, ENERGY, HEALTH, DEADCASE}
+    public STATE myState;
+    ///
+    //[SerializeField] int currentState = 0;
+    [Header("Definição de valores iniciais")]
+    [Range(0,100)]
+    [SerializeField] float health, energy, hunger;
+    [Header("Definição de valores máximos")]
+    [SerializeField] float maxHealth, maxEnergy, maxHunger;
+    //multiplicador de tempo
+    [Header("Multiplicador de Tempo")]
+    [SerializeField] float multTimeHeath, multTimeEnergy, multTimeHunger;
+
+    void Start()
+    {
+        health = maxHealth;
+        energy = maxEnergy;
+        hunger = maxHunger;
+    }
     void Update()
     {
-        
+        health -= Time.deltaTime * multTimeHeath;
+        energy -= Time.deltaTime * multTimeEnergy;
+        hunger -= Time.deltaTime * multTimeHunger;
     }
 
     void State()
     {       
-        switch (currentState)
+        switch (hunger)
         {
-            case 1:
-                myState = STATE.TIRED;
+            case 0:
+                myState = STATE.HUNGER;
                 break;
-            case 2:
-                myState = STATE.OK;
+        }
+        switch (energy)
+        {
+            case 0:
+                myState = STATE.ENERGY;
                 break;
-            case 3:
-                myState = STATE.HAPPY;
+        }
+        switch (health)
+        {
+            case 0:
+                myState = STATE.HEALTH;
                 break;
-            case 4:
-                myState = STATE.SAD;
-                break;
-        }        
+        }
+        if(health == 0 && energy == 0 && hunger == 0)
+        {
+            myState = STATE.DEADCASE;
+        }       
+       
+        //switch (currentState)
+        //{
+        //    case 1:
+        //        myState = STATE.HUNGER;
+        //        break;
+        //    case 2:
+        //        myState = STATE.ENERGY;
+        //        break;
+        //    case 3:
+        //        myState = STATE.HEALTH;
+        //        break;
+        //    case 4:
+        //        myState = STATE.DEADCASE;
+        //        break;
+        //}        
 
     }
 }
