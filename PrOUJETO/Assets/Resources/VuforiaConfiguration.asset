@@ -22,7 +22,7 @@ MonoBehaviour:
     useDelayedLoadingObjectTargets: 0
     modelTargetRecoWhileExtendedTracked: 1
     version: 8.5.9
-    eulaAcceptedVersions: '{"Values":["8.3","8.0","8.5"]}'
+    eulaAcceptedVersions: '{"Values":["8.3","8.0","8.5","9.8"]}'
   database:
     disableModelExtraction: 0
   videoBackground:
@@ -39,6 +39,6 @@ MonoBehaviour:
     autoInitTracker: 0
     autoStartTracker: 0
   webcam:
-    deviceNameSetInEditor: HD Pro Webcam C920
+    deviceNameSetInEditor: VGA WebCam
     turnOffWebCam: 0
     renderTextureLayer: 30
