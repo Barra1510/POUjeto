@@ -11,7 +11,7 @@ public class StatusManager : MonoBehaviour
     //[SerializeField] int currentState = 0;
     [Header("Definição de valores iniciais")]
     [Range(0,100)]
-    [SerializeField] float health, energy, hunger;
+    public float health, energy, hunger;
     [Header("Definição de valores máximos")]
     [SerializeField] float maxHealth, maxEnergy, maxHunger;
     //multiplicador de tempo
