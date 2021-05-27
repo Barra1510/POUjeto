@@ -29,6 +29,15 @@ public class StatusManager : MonoBehaviour
         health -= Time.deltaTime * multTimeHeath;
         energy -= Time.deltaTime * multTimeEnergy;
         hunger -= Time.deltaTime * multTimeHunger;
+        if (health <= 0)
+            health = 0;
+
+        if (energy <= 0)
+            energy = 0;
+
+        if (hunger <= 0)
+            hunger = 0;
+
     }
 
     void State()
