@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScreenTransition : MonoBehaviour
 {
     [SerializeField] GameObject[] screenList;
-    [SerializeField] int actualScreen = 0;
+    private int actualScreen = 0;
     public void GoToMenu()
     {
         SceneManager.LoadScene("Menu");
