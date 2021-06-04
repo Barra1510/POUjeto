@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 87cf43d4f6e4ed240b47e7b7d2fb366c
   - enabled: 1
-    path: Assets/Scenes/Teste Vuforia.unity
+    path: Assets/Scenes/AR.unity
     guid: 6a3860de342cc4f4284308cfdf0a0e28
+  - enabled: 1
+    path: Assets/Scenes/MiniGame.unity
+    guid: 8bb74bc463f58f34e81f29d610d4a6e9
   m_configObjects: {}

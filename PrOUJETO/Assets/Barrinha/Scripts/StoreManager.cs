@@ -4,14 +4,43 @@ using UnityEngine;
 using UnityEngine.UI;
 public class StoreManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] imageList;
+    [Header("Painel da Loja")]
     [SerializeField] GameObject storePanel;
+    [Header("Lista de imagens da loja")]
+    [SerializeField] GameObject[] imageList;
+    [Header("Lista de imagens do inventário do player")]
     [SerializeField] Image[] image;
+    [Header("Textos de multiplicação")]
     [SerializeField] Text[] quantItem;
+    [Header("Referência ao Status")]
+    [SerializeField] StatusManager status;
 
+    [Header("Valor de item")]
+    [SerializeField] int[] valorItem;
+    [Header("Dinheiro")]
+    [SerializeField] int money;
+    [SerializeField] Text moneyText;
+    [Header("Multiplicador de dinheiro")]
+    [SerializeField] int multMoney;
+
+    [SerializeField] PlayerMove player;     
     private int actualImage = 0;
     private int[] quant = new int[5];
 
+    private void Start()
+    {        
+        money = 0;
+        money = (int)player.topScore  * multMoney;        
+        for (int i = 0; i <= 5; i++)
+        {
+            imageList[i].GetComponent<Image>().sprite = image[i].GetComponent<Image>().sprite;
+        }
+    }
+
+    private void Update()
+    {
+        AttMoney();
+    }
     public void PanelOn()
     {
         if (!storePanel.activeInHierarchy)        
@@ -19,38 +48,74 @@ public class StoreManager : MonoBehaviour
         else
             storePanel.SetActive(false);  
     }
-    public void Plus1()
+    public void PlusEnergy(int quantity)
     {
-        quant[0] += 1;
-        quantItem[0].text = "x" + quant[0].ToString();
+        if(quant[0] != 0)
+            status.energy += (quantity/2);
+        if (quant[3] != 0)
+            status.energy += quantity;
+    }
+    public void PlusHunger(int quantity)
+    {
+        if (quant[1] != 0)
+            status.hunger += (quantity/2);
+        if (quant[4] != 0)
+            status.hunger += quantity;
+    }
+    public void PlusHealth(int quantity)
+    {
+        if (quant[2] != 0)
+            status.health += (quantity/2);
+        if (quant[5] != 0)
+            status.health += quantity;
+    }
+    public void Plus(int i)
+    {
+        if (money != 0)
+        {
+            switch(i)
+            {
+                //energy
+                case 0:                       
+                    quant[i] += 1;
+                    quantItem[i].text = "x" + quant[i].ToString();
+                    money -= valorItem[i];                    
+                    break;
+                //hunger
+                case 1:
+                    quant[i] += 1;
+                    quantItem[i].text = "x" + quant[i].ToString();
+                    money -= valorItem[i];
+                    break;
+                //health
+                case 2:
+                    quant[i] += 1;
+                    quantItem[i].text = "x" + quant[i].ToString();
+                    money -= valorItem[i];
+                    break;
+                //energy
+                case 3:
+                    quant[i] += 1;
+                    quantItem[i].text = "x" + quant[i].ToString();
+                    money -= valorItem[i];
+                    break;
+                //hunger
+                case 4:
+                    quant[i] += 1;
+                    quantItem[i].text = "x" + quant[i].ToString();
+                    money -= valorItem[i];
+                    break;
+                //health
+                case 5:
+                    quant[i] += 1;
+                    quantItem[i].text = "x" + quant[i].ToString();
+                    money -= valorItem[i];
+                    break;
+            }
+            
+        }
         
-    }
-    public void Plus2()
-    {
-        quant[1] += 1;
-        quantItem[1].text = "x" + quant[1].ToString();
-    }
-    public void Plus3()
-    {
-        quant[2] += 1;
-        quantItem[2].text = "x" + quant[2].ToString();
-    }
-    public void Plus4()
-    {
-        quant[3] += 1;
-        quantItem[3].text = "x" + quant[3].ToString();
-    }
-    public void Plus5()
-    {
-        quant[4] += 1;
-        quantItem[4].text = "x" + quant[4].ToString();
-    }
-    public void Plus6()
-    {
-        quant[5] += 1;
-        quantItem[5].text = "x" + quant[5].ToString();
-    }
-
+    }   
     public void GoLeftItem()
     {
         imageList[actualImage].SetActive(false);
@@ -64,7 +129,6 @@ public class StoreManager : MonoBehaviour
             imageList[actualImage].SetActive(true); ;
         }
     }
-
     public void GoRightItem()
     {
         imageList[actualImage].SetActive(false);
@@ -77,5 +141,9 @@ public class StoreManager : MonoBehaviour
         {
             imageList[actualImage].SetActive(true); ;
         }
+    }
+    private void AttMoney()
+    {
+        moneyText.text = money.ToString();
     }
 }

@@ -7,14 +7,9 @@ public class ScreenTransition : MonoBehaviour
 {
     [SerializeField] GameObject[] screenList;
     private int actualScreen = 0;
-    public void GoToMenu()
+    public void GoTo(int i)
     {
-        SceneManager.LoadScene("Menu");
-    }
-
-    public void GoToAR()
-    {
-        SceneManager.LoadScene("Teste Vuforia");
+        SceneManager.LoadScene(i);
     }
 
     public void GoLeft()
