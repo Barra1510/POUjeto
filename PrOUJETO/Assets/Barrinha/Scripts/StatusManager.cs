@@ -17,6 +17,11 @@ public class StatusManager : MonoBehaviour
     //multiplicador de tempo
     [Header("Multiplicador de Tempo")]
     [SerializeField] float multTimeHeath, multTimeEnergy, multTimeHunger;
+    //decrementador de energia
+    [Header("Decrementar Energia")]
+    [SerializeField] int energyLoss;
+
+    [SerializeField] ScreenTransition screen;
 
     void Start()
     {
@@ -27,8 +32,9 @@ public class StatusManager : MonoBehaviour
     void Update()
     {
         health -= Time.deltaTime * multTimeHeath;
-        energy -= Time.deltaTime * multTimeEnergy;
+        energy += Time.deltaTime * multTimeEnergy;
         hunger -= Time.deltaTime * multTimeHunger;
+
         if (health <= 0)
             health = 0;
 
@@ -38,8 +44,16 @@ public class StatusManager : MonoBehaviour
         if (hunger <= 0)
             hunger = 0;
 
-    }
+        if(health >= maxHealth)
+            health = maxHealth;
 
+        if (energy >= maxEnergy)
+            energy = maxEnergy;
+
+        if (hunger >= maxHunger)
+            hunger = maxHunger;
+
+    }
     void State()
     {       
         switch (hunger)
@@ -81,6 +95,20 @@ public class StatusManager : MonoBehaviour
         //        break;
         //}        
 
+    }
+    public void EnergyLoss()
+    {
+        energy -= energyLoss;
+    }
+    public void CheckEnergy()
+    {
+        if (energy >= 5)
+        {
+            screen.GoTo(2);
+            EnergyLoss();
+        }
+        else
+            Debug.Log("Falta energia");
     }
 }
     
