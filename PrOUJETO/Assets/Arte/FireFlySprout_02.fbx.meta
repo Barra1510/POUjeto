@@ -9,6 +9,18 @@ ModelImporter:
   - first:
       74: 1079665108409675491
     second: Armature|Jump
+  - first:
+      74: -1422011007694221501
+    second: Armature|ArmatureAction.001
+  - first:
+      74: 5069133864629926381
+    second: Armature|Doente
+  - first:
+      74: 1371128943475251327
+    second: Armature|Ficando_Tristaum
+  - first:
+      74: -6280709913869290056
+    second: Armature|fome
   externalObjects: {}
   materials:
     materialImportMode: 1
