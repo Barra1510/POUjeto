@@ -14,17 +14,17 @@ public class PlayerMove : MonoBehaviour
     
     [SerializeField] GameObject scoreText;
     
-    private XML xml;    
+    private SaveData saveData;    
 
     private void Start()
     {        
         deathMenu.SetActive(false);
-        xml = GameObject.Find("Xml").GetComponent<XML>();
+        saveData = GameObject.Find("SaveData").GetComponent<SaveData>();
         //xml.LoadByXml();        
     }
     void Update()
     {
-        Debug.Log(xml);
+        Debug.Log(saveData);
         if (rb.velocity.y > 0 && transform.position.y > topScore)
         {
             topScore = transform.position.y;
@@ -35,7 +35,7 @@ public class PlayerMove : MonoBehaviour
         if (transform.position.y <= topScore - 40)
         {            
             deathMenu.SetActive(true); //to set active the deathmenu that i created on canvas
-            xml.TransformScoreInMoney();
+            saveData.TransformScoreInMoney();
             Time.timeScale = 0;
             //to freeze the game
 

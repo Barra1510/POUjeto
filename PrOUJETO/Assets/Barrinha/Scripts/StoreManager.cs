@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 public class StoreManager : MonoBehaviour
 {
     [Header("Painel da Loja")]
@@ -21,11 +22,12 @@ public class StoreManager : MonoBehaviour
     [SerializeField] int money;
     [SerializeField] Text moneyText;    
 
-    [SerializeField] PlayerMove player;     
+    [SerializeField] PlayerMove player;
+    [SerializeField] Text arquivo;
     private int actualImage = 0;
     private int[] quant = new int[5];
 
-    private XML xml;
+    private SaveData saveData;
     
     [SerializeField] GameObject panelPause;
     private void Start()
@@ -36,17 +38,31 @@ public class StoreManager : MonoBehaviour
     {
         Time.timeScale = 1;
         panelPause.SetActive(false);
+        ResetGame();
         for (int i = 0; i <= 5; i++)
         {
             imageList[i].GetComponent<Image>().sprite = image[i].GetComponent<Image>().sprite;
         }
     }
+    public void ResetGame()
+    {
+        for(int i = 0; i < 6; i++)
+        {
+            SetItemQuant(0, i);
+        }
 
+        SetHealth(100);
+        SetEnergy(100);
+        SetHunger(100);
+        SetMoney(0);
+
+        saveData.ResetValors();
+    }
     public void Load()
     {
         Time.timeScale = 1;
-        xml = GameObject.Find("Xml").GetComponent<XML>();
-        xml.LoadByXml();        
+        saveData = GameObject.Find("SaveData").GetComponent<SaveData>();
+        saveData.Load();       
         panelPause.SetActive(false);
        
         for (int i = 0; i <= 5; i++)
@@ -56,14 +72,17 @@ public class StoreManager : MonoBehaviour
         
 
     }
+    public void Save()
+    {
+        saveData.Save();
+    }
     private void Update()
-    {        
-        Debug.Log(Time.timeScale);
-        AttMoney();        
+    {   
+        AttMoney();
+        //saveData.Save();
     }
     public void PanelOn()
     {
-        
         if (!storePanel.activeInHierarchy)        
             storePanel.SetActive(true);
         else
@@ -137,6 +156,46 @@ public class StoreManager : MonoBehaviour
         }
         
     }   
+    public void SetItemQuant(int valor, int index)
+    {
+        switch(index)
+        {
+            case 0:
+                quant[0] = valor;
+                break;
+            case 1:
+                quant[1] = valor;
+                break;
+            case 2:
+                quant[2] = valor;
+                break;
+            case 3:
+                quant[3] = valor;
+                break;
+            case 4:
+                quant[4] = valor;
+                break;
+
+        }
+    }
+    public int GetItemQuant(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                return quant[i];                
+            case 1:
+                return quant[i];                
+            case 2:
+                return quant[i];               
+            case 3:
+                return quant[i];                
+            case 4:
+                return quant[i];                
+                            
+        }
+        return i;
+    }
     public void GoLeftItem()
     {
         imageList[actualImage].SetActive(false);

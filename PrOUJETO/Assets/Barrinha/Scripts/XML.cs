@@ -47,7 +47,7 @@ public class XML : MonoBehaviour
         statusEnergy = xmlDocument.CreateElement("Energia");
         statusHunger = xmlDocument.CreateElement("Fome");
 
-        if (File.Exists(Application.dataPath + "/SaveData.xml"))
+        if (File.Exists("Android/data/com.DefaultCompany.PrOUJETO/files" + "/SaveData.xml"))
         {
             money.InnerText = dinero.ToString();
             Debug.Log("Saved Money");
@@ -66,16 +66,16 @@ public class XML : MonoBehaviour
 
         save.AppendChild(playerStatus);
         xmlDocument.AppendChild(save);
-
-        xmlDocument.Save(Application.dataPath + "/SaveData.xml");
-        if (File.Exists(Application.dataPath + "/SaveData.xml"))
+        
+        xmlDocument.Save("Android/data/com.DefaultCompany.PrOUJETO/files" + "/SaveData.xml");
+        if (File.Exists("Android/data/com.DefaultCompany.PrOUJETO/files" + "/SaveData.xml"))
         {
             Debug.Log("Documento criado");
         }
     }
     public void TransformScoreInMoney()
     {
-        if (!File.Exists(Application.dataPath + "/SaveData.xml"))
+        if (!File.Exists("Android/data/com.DefaultCompany.PrOUJETO/files" + "/SaveData.xml"))
         {
             Debug.Log("Não existe save");
             
@@ -89,11 +89,11 @@ public class XML : MonoBehaviour
     }
     public void LoadByXml()
     {
-        if (File.Exists(Application.dataPath + "/SaveData.xml"))
+        if (File.Exists("Android/data/com.DefaultCompany.PrOUJETO/files" + "/SaveData.xml"))
         {
 
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(Application.dataPath + "/SaveData.xml");
+            xmlDocument.Load("Android/data/com.DefaultCompany.PrOUJETO/files" + "/SaveData.xml");
 
             XmlNodeList playerStatus = xmlDocument.GetElementsByTagName("PlayerStatus");
             XmlNodeList money = xmlDocument.GetElementsByTagName("Dinheiro");

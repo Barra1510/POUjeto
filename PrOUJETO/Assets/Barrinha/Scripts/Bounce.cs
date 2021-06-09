@@ -7,12 +7,7 @@ public class Bounce : MonoBehaviour
     [SerializeField] float upForce;
     [SerializeField] Collider col;
     [SerializeField] PlayerMove player;
-
-    private void Update()
-    {        
-       
-       
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Rigidbody>().velocity.y <= 0)
@@ -52,4 +47,5 @@ public class Bounce : MonoBehaviour
         }
 
     }
+    
 }
