@@ -19,30 +19,51 @@ public class StoreManager : MonoBehaviour
     [SerializeField] int[] valorItem;
     [Header("Dinheiro")]
     [SerializeField] int money;
-    [SerializeField] Text moneyText;
-    [Header("Multiplicador de dinheiro")]
-    [SerializeField] int multMoney;
+    [SerializeField] Text moneyText;    
 
     [SerializeField] PlayerMove player;     
     private int actualImage = 0;
     private int[] quant = new int[5];
 
+    private XML xml;
+    
+    [SerializeField] GameObject panelPause;
     private void Start()
-    {        
-        money = 0;
-        money = (int)player.topScore  * multMoney;        
+    {
+        Time.timeScale = 0;
+    }
+    public void StartAgain()
+    {
+        Time.timeScale = 1;
+        panelPause.SetActive(false);
         for (int i = 0; i <= 5; i++)
         {
             imageList[i].GetComponent<Image>().sprite = image[i].GetComponent<Image>().sprite;
         }
     }
 
-    private void Update()
+    public void Load()
     {
-        AttMoney();
+        Time.timeScale = 1;
+        xml = GameObject.Find("Xml").GetComponent<XML>();
+        xml.LoadByXml();        
+        panelPause.SetActive(false);
+       
+        for (int i = 0; i <= 5; i++)
+        {
+            imageList[i].GetComponent<Image>().sprite = image[i].GetComponent<Image>().sprite;
+        }
+        
+
+    }
+    private void Update()
+    {        
+        Debug.Log(Time.timeScale);
+        AttMoney();        
     }
     public void PanelOn()
     {
+        
         if (!storePanel.activeInHierarchy)        
             storePanel.SetActive(true);
         else
@@ -143,7 +164,39 @@ public class StoreManager : MonoBehaviour
         }
     }
     private void AttMoney()
+    {        
+        moneyText.text = money.ToString();        
+    }
+    public int GetMoney()
     {
-        moneyText.text = money.ToString();
+        return money;
+    }    
+    public void SetMoney(int newMoney)
+    {
+        money = newMoney;
+    }
+    public float GetEnergy()
+    {
+        return status.energy;
+    }
+    public void SetEnergy(float energy)
+    {
+        status.energy = energy;
+    }
+    public float GetHunger()
+    {
+        return status.hunger;
+    }
+    public void SetHunger(float hunger)
+    {
+        status.hunger = hunger;
+    }
+    public float GetHealth()
+    {
+        return status.health;
+    }
+    public void SetHealth(float health)
+    {
+        status.health = health;
     }
 }
